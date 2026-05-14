@@ -1,8 +1,7 @@
 plugin_init = require "plugin_init"
 vim_opt = require "vim_opt"
 
---vim.opt.runtimepath\append(vim.fn.stdpath("config") .. "/vendor/yaml/?.lua")
-package.path ..= ";" .. vim.fn.stdpath("config") .. "/vendor/yaml/?.lua"
+package.path ..= ";" .. vim.fn.stdpath("config") .. "/vendor/lyaml/?.lua"
 
 config_loader = require "config_loader"
 
