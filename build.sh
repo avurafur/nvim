@@ -5,7 +5,10 @@ SRC="src"
 OUT="lua"
 mkdir -p "$OUT"
 
-moonc init.moon -o init.lua
+if [[ ! -f "init.lua" || "init.moon" -nt "init.lua" ]]; then
+  echo "Compiling init.moon"
+  moonc init.moon -o init.lua
+fi
 
 find "$SRC" -name "*.moon" | while read -r file; do
     rel="${file#$SRC/}"
@@ -13,10 +16,7 @@ find "$SRC" -name "*.moon" | while read -r file; do
 
     mkdir -p "$(dirname "$out")"
 
-    last_build=$(stat -c %Y "$out" 2>/dev/null || echo 0)
-    last_src=$(stat -c %Y "$file")
-
-    if (( last_src > last_build )); then
+    if [[ ! -f "$out" || "$file" -nt "$out" ]]; then
         echo "Compiling $file"
         moonc -o "$out" "$file"
     fi
