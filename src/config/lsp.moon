@@ -66,18 +66,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
           return 
 })
 
-vim.keymap.set('n', '<Space>fsr', ":lua vim.lsp.buf.references()<cr>", 
+vim.keymap.set('n', '<Space>gr', ":lua vim.lsp.buf.references()<cr>", 
   { silent: true, desc: 'Find Symbol references' })
 
-vim.keymap.set('n', '<Space>fsw', ":lua vim.lsp.buf.workspace_symbol()<cr>",
+vim.keymap.set('n', '<Space>gs', ":lua vim.lsp.buf.workspace_symbol()<cr>",
     { silent: true, desc: 'Find Symbol workspace' })
 
-vim.keymap.set('n', '<Space>r.', ":lua vim.lsp.buf.code_action()<cr>", {
+vim.keymap.set('n', '<Space>a', ":lua vim.lsp.buf.code_action()<cr>", {
   silent: true,
   desc: 'Refactor code action',
 })
 
-vim.keymap.set('n', '<Space>rr', ":lua vim.lsp.buf.rename()<cr>", {
+vim.keymap.set('n', '<Space>r', ":lua vim.lsp.buf.rename()<cr>", {
   silent: true,
   desc: 'Refactor rename',
 })

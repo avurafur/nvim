@@ -13,9 +13,12 @@ xpcall(->
       callback: -> vim.cmd('highlight EndOfBuffer ctermbg=NONE guibg=NONE')
     })
 
-    vim.cmd.colorscheme "base16-black-metal-dark-funeral"
+    vim.cmd.colorscheme"base16-black-metal-dark-funeral"
 
-    vim.cmd("autocmd BufLeave,BufWinLeave * silent! mkview")
-    vim.cmd("autocmd BufReadPost * silent! loadview")
-    vim.cmd("source " .. vim.fn.stdpath("config") .. "/auto-pair.vim")
+    vim.cmd"autocmd BufLeave,BufWinLeave * silent! mkview"
+    vim.cmd"autocmd BufReadPost * silent! loadview"
+
+    vim.keymap.set("n", "gl", "$", { noremap: true, silent: true })
+    vim.keymap.set("n", "gh", "0", { noremap: true, silent: true })
+    vim.keymap.set("n", "ge", "G", { noremap: true, silent: true })
 print)

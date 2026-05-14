@@ -12,5 +12,5 @@ require("nvim-tree").setup({
       quit_on_open: true
 })
 
-vim.keymap.set('n', '<Space>da', ":NvimTreeToggle<cr>", { silent: true, desc: 'Directory view toggle' })
+vim.keymap.set('n', '<Space>e', ":NvimTreeToggle<cr>", { silent: true, desc: 'Directory view toggle' })
 vim.keymap.set('n', '<Space>df', ":NvimTreeFocus<cr>", { silent: true, desc: 'Directory view focus' })

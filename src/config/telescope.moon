@@ -21,5 +21,5 @@ telescope.setup({
 
 builtin = require('telescope.builtin')
 
-vim.keymap.set('n', '<Space>ff', builtin.find_files, { desc: 'Find files', silent: true })
-vim.keymap.set('n', '<Space>fg', builtin.live_grep, { desc: 'Find with grep', silent: true })
+vim.keymap.set('n', '<Space>f', builtin.find_files, { desc: 'Find files', silent: true })
+vim.keymap.set('n', '<Space>F', builtin.live_grep, { desc: 'Find with grep', silent: true })
