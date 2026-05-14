@@ -1,6 +1,14 @@
 plugin_init = require "plugin_init"
 vim_opt = require "vim_opt"
 
+--vim.opt.runtimepath\append(vim.fn.stdpath("config") .. "/vendor/yaml/?.lua")
+package.path ..= ";" .. vim.fn.stdpath("config") .. "/vendor/yaml/?.lua"
+
+config_loader = require "config_loader"
+
+config_loader.load("/config.yml")
+config = config_loader.get("/config.yml") or {}
+
 xpcall(->
     plugin_init.setup!
     vim_opt.setup!
@@ -13,7 +21,7 @@ xpcall(->
       callback: -> vim.cmd('highlight EndOfBuffer ctermbg=NONE guibg=NONE')
     })
 
-    vim.cmd.colorscheme"base16-black-metal-dark-funeral"
+    vim.cmd.colorscheme(config.theme or "base16-black-metal-dark-funeral")
 
     vim.cmd"autocmd BufLeave,BufWinLeave * silent! mkview"
     vim.cmd"autocmd BufReadPost * silent! loadview"

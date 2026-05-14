@@ -1,7 +1,12 @@
 lazy-lock.json
-desktop.ini
 .tup/
-lua/
+desktop.ini
+
+/lsp.yml
+/config.yml
+
 init.lua
+lua/
+
 tags
 TAGS

@@ -1,0 +1,8 @@
+servers:
+  rust-analyzer:
+  clangd:
+    options:
+      cmds: ["clangd","--background-index","--suggest-missing-includes"]
+      filetypes: ["c","cpp","objc","objcpp"] 
+  ts_ls:
+    exec: tsserver

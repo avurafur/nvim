@@ -1,6 +1,16 @@
 lspconfig = vim.lsp.config
 lsp = vim.lsp
 
+config_loader = require "config_loader"
+
+config_loader.load("/lsp.yml")
+config = config_loader.get("/lsp.yml") or {}
+
+lsp_servers = {}
+
+for server_name,server_data in pairs(config.servers or {}) do
+    lsp_servers[server_name] = server_data
+
 if lspconfig == nil
   return print("vim.lsp.config is nil")
 
@@ -9,50 +19,19 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 capabilities.textDocument.signatureHelp =
     dynamicRegistration: true,
-    signatureInformation: {
+    signatureInformation:
       documentationFormat: { "markdown", "plaintext" },
       parameterInformation: { labelOffsetSupport: true }
-    }
 
-lsp_servers = {
-    { "lua_ls",  "lua-language-server" },
-    {
-        "rust_analyzer",
-        "rust-analyzer",
-        opts:
-          settings: {
-              ['rust-analyzer']: {}
-          },
-          capabilities: capabilities
-    },
-    { "ts_ls", "tsserver"},
-    { "pylsp",format_on_save: true},
-    { "zls"},
-    { "gopls"},
-    { "nimls","nimlangserver"},
-}
-
-table.insert(lsp_servers,{
-    "clangd",
-    opts:
-      capabilities: capabilities,
-      cmd: {
-          "clangd"
-          "--background-index"
-          "--suggest-missing-includes"
-      },
-      filetypes: { "c", "cpp", "objc", "objcpp" }
-})
-
-default_opts = 
+default_opts =
     capabilities: capabilities,
     on_exit: (code, signal, client_id) ->
 
-for _, server in ipairs(lsp_servers)
-    if type(server) == "table"
-      if vim.fn.executable(server[2] or server[1]) == 1
-          lsp.config(server[1],server.opts or default_opts)
-          lsp.enable(server[1])
+for lsp_name,data in pairs(lsp_servers)
+    if type(data) == "table"
+      if vim.fn.executable(data.exec or lsp_name) == 1
+          lsp.config(lsp_name,data.options or default_opts)
+          lsp.enable(lsp_name)
 
 vim.diagnostic.config({
   virtual_text: true
@@ -60,7 +39,7 @@ vim.diagnostic.config({
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback: (args) ->
-        client = vim.lsp.get_client_by_id(args.data.client_id)
+        client = lsp.get_client_by_id(args.data.client_id)
 
         if not client 
           return 
