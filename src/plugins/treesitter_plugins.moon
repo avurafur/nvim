@@ -1,15 +1,13 @@
 return {
     {
         'nvim-treesitter/nvim-treesitter',
-        run = function()
-            local M = require('nvim-treesitter.install')
+        run: ->
+            M = require('nvim-treesitter.install')
             M.compilers = { vim.fn.getenv('CC'), "cc", "gcc", "clang", "cl", "zig" }
             M.prefer_git = false
-            M.update({ with_sync = true })
-        end,
+            M.update({ with_sync: true })
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
     },
 }
-

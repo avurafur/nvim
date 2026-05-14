@@ -1,7 +1,7 @@
-return {
+{
     'nvim-lua/plenary.nvim',
     {
         'nvim-telescope/telescope.nvim',
-        version = "*"
-    },
+        version: "*"
+    }
 }

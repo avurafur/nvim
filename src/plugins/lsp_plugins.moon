@@ -1,9 +1,9 @@
-return {
+{
     {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-        "neovim/nvim-lspconfig",
-        run = ":MasonUpdate",
+        "williamboman/mason.nvim"
+        "williamboman/mason-lspconfig.nvim"
+        "neovim/nvim-lspconfig"
+        run: ":MasonUpdate"
     },
     { "hrsh7th/cmp-nvim-lsp" },
     { "hrsh7th/cmp-buffer" },

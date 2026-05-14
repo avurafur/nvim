@@ -1,12 +1,11 @@
-local M = {}
-local vo = vim.opt
+vo = vim.opt
 
-function M.setup()
+{
+  setup: -> 
     vo.number = true
     vo.background = "dark"
     vo.termguicolors = true
-
-    vo.sessionoptions:remove("curdir")
+    vo.sessionoptions\remove "curdir"
 
     vo.tabstop = 2
     vo.softtabstop = 2
@@ -64,8 +63,6 @@ function M.setup()
     vo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
     vim.scrolloff = 8
-    vo.isfname:append("@-@")
+    vo.isfname\append "@-@"
     vo.updatetime = 50
-end
-
-return M
+}

@@ -1,0 +1,4 @@
+: init.moon |> moonc -o %o %f |> init.lua
+: foreach src/*.moon |> moonc -o %o %f |> lua/%B.lua
+: foreach src/config/*.moon |> moonc -o %o %f |> lua/config/%B.lua
+: foreach src/plugins/*.moon |> moonc -o %o %f |> lua/plugins/%B.lua
