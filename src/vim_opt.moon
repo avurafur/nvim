@@ -1,7 +1,7 @@
 vo = vim.opt
 
 {
-  setup: -> 
+  init: -> 
     vo.number = true
     vo.background = "dark"
     vo.termguicolors = true

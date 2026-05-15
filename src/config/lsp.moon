@@ -3,12 +3,12 @@ lsp = vim.lsp
 
 config_loader = require "config_loader"
 
-config_loader.load("/lsp.yml")
-config = config_loader.get("/lsp.yml") or {}
+config_loader.load("/languages.yml")
+config = config_loader.get("/languages.yml") or {}
 
 lsp_servers = {}
 
-for server_name,server_data in pairs(config.servers or {}) do
+for server_name,server_data in pairs(config.lsp or {}) do
     lsp_servers[server_name] = server_data
 
 if lspconfig == nil
@@ -33,6 +33,9 @@ for lsp_name,data in pairs(lsp_servers)
           lsp.config(lsp_name,data.options or default_opts)
           lsp.enable(lsp_name)
 
+          if data.debug_info
+            print(string.format("INFO: Started %s",lsp_name))
+
 vim.diagnostic.config({
   virtual_text: true
 })
@@ -43,6 +46,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         if not client 
           return 
+
+        s_data = lsp_servers[client.name]
+
+        if s_data.format_on_save and client.supports_method("textDocument/formatting")
+          vim.keymap.set('n', '<Space>=', ":lua vim.lsp.buf.format()<cr>", { silent: true, desc: 'Refactor format' })
+
+          vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer: args.buf,
+              callback: -> 
+                s_data = lsp_servers[client.name]
+
+                if s_data.format_on_save
+                  lsp.buf.format({ bufnr: args.buf, id: client.id })
+                  if s_data.debug_info
+                    print(string.format("INFO: Formatting file using %s",client.name))
+          })
 })
 
 vim.keymap.set('n', '<Space>gr', ":lua vim.lsp.buf.references()<cr>", 

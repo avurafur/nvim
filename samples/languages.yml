@@ -1,8 +1,13 @@
-servers:
+lsp:
   rust-analyzer:
+  pylsp:
+  zls:
+  gopls:
   clangd:
     options:
       cmds: ["clangd","--background-index","--suggest-missing-includes"]
       filetypes: ["c","cpp","objc","objcpp"] 
+  lua_ts:
+    exec: "lua-language-server"
   ts_ls:
     exec: tsserver

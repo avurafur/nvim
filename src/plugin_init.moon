@@ -1,5 +1,5 @@
 {
-  setup: -> 
+  init: -> 
     require "plugins"
     require "config.nvim_tree"
     require "config.telescope"

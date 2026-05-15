@@ -9,8 +9,8 @@ config_loader.load("/config.yml")
 config = config_loader.get("/config.yml") or {}
 
 xpcall(->
-    plugin_init.setup!
-    vim_opt.setup!
+    plugin_init.init!
+    vim_opt.init!
 
     vim.api.nvim_create_augroup('MyColorSchemeGroup', { clear: true })
 

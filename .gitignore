@@ -2,7 +2,7 @@ lazy-lock.json
 .tup/
 desktop.ini
 
-/lsp.yml
+/languages.yml
 /config.yml
 
 init.lua
